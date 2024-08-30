@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 playstore = pd.read_csv('data/googleplaystore.csv')
 
-playstore.drop_duplicates(subset = 'App') 
+playstore = playstore.drop_duplicates(subset = 'App') 
 
 # bagian ini untuk menghapus row 10472 karena nilai data tersebut tidak tersimpan pada kolom yang benar
 playstore = playstore.drop([10472])
@@ -49,6 +49,9 @@ def index():
     top_category = pd.crosstab(index=playstore['Category'], 
                                columns="Jumlah").sort_values(by='Jumlah', 
                                                              ascending=False).reset_index()
+    print(top_category.head())
+    print(df2.shape)
+
     # Dictionary stats digunakan untuk menyimpan beberapa data yang digunakan untuk menampilkan nilai di value box dan tabel
     stats = {
         'most_categories' : top_category['Category'].iloc[0],
